@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.parent')
 
 @section('title', '商品情報詳細画面')
 
@@ -6,40 +6,41 @@
     <div class="container">
         <div class="row">
             <h1>商品情報詳細画面</h1>
-                <div class="form-group">
-                    <label for="product">商品名</label>
-                    <input type="text" class="form-control" id="product" name="product">
-                </div>
+        </div>
 
-                <div class="form-group">
-                    <label for="company">メーカー名</label>
-                    <input type="text" class="form-control" id="company" name="company">
-                </div>
-
-                <div class="form-group">
-                    <label for="price">価格</label>
-                    <input type="text" class="form-control" id="price" name="price">
-                </div>
-
-                <div class="form-group">
-                    <label for="stock">在庫数</label>
-                    <input type="text" class="form-control" id="stock" name="stock">
-                </div>
-
-                <div class="form-group">
-                    <label for="comment">コメント</label>
-                    <textarea class="form-control" id="comment" name="comment"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="photo">商品画像</label>
-                    <input type="text" class="form-control" id="url" name="url" placeholder="URL">
-                </div>
-
-                <button type="submit" class="btn btn-regist">編集</button>
-
-                <button type="submit" class="btn btn-return">戻る</button>
-            </form>
+        <div class="form">
+            <table class="drinkDetail">
+                <tr>
+                    <td>ID</td>
+                    <td>{{ $products->id }}.</td>
+                </tr>
+                <tr>
+                    <td>画像</td>
+                    <td><img src="{{ asset($products->img_path) }}"></td>
+                </tr>
+                <tr>
+                    <td>商品名</td>
+                    <td>{{ $products->product_name }}</td>
+                </tr>
+                <tr>
+                    <td>メーカー名</td>
+                    <td>{{ $products->company->company_name }}</td>
+                </tr>
+                <tr>
+                    <td>価格</td>
+                    <td>&yen{{ $products->price }}</td>
+                </tr>
+                <tr>
+                    <td>在庫数</td>
+                    <td>{{ $products->stock }}</td>
+                </tr>
+                <tr>
+                    <td>コメント</td>
+                    <td>{{ $products->comment }}</td>
+                </tr>
+            </table>
+            <button id="btnHenshu" class="btnHenshu"><a href="{{ route('drink.edit', $products->id) }}">編集</a></button>
+            <button id="btnModoru" class="btnModoru"><a href="{{ route('drink.index', $products) }}">戻る</a></button>
         </div>
     </div>
 @endsection
