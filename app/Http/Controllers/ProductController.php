@@ -89,14 +89,15 @@ class ProductController extends Controller
 
     //更新
     public function update(DrinkRequest $request, $id) {
-
+        
+        $products = Product::find($id);
         $image = $request->file('img_path');
         if($image) {
             $file_name = $image->getClientOriginalName();
             $image->storeAs('public/image', $file_name);
             $img_path = 'storage/image/' . $file_name;
         } else {
-            $img_path = null;
+            $img_path = $products->img_path;
         }
 
         DB::beginTransaction();
@@ -109,6 +110,6 @@ class ProductController extends Controller
             DB::rollBack();
             return back();
         }
-            return redirect()->route('drink.edit', ['id' => $id]);
+            return redirect(route('drink.edit', ['id' => $id]));
     }
 }

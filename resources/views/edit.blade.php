@@ -31,7 +31,7 @@
                     <select class="form-control" id="company_name" name="company_name">
                         <option value="">メーカー名</option>
                         @foreach ($companies as $company)
-                            <option value="{{ $company->id }}" @if(old('company_name', $products->company_id) == $products->company_id) selected @endif>
+                            <option value="{{ $company->id }}" @if($company->id == $products->company_id) selected @endif>
                                 {{ $company->company_name }}
                             </option>
                         @endforeach
