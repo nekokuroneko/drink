@@ -15,7 +15,7 @@ body{
     padding: 30px;
 }
 
-button{
+button, .btnSakujo{
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -25,6 +25,10 @@ button{
     cursor: pointer;
 }
 
+.btnSakujo{
+    background-color: red;
+}
+
 button#btnShinki{
     background-color: orange;
 }
@@ -32,10 +36,6 @@ button#btnShinki{
 button#btnTouroku, button#btnHenshu, button#btnKoushin{
     background-color: orange;
     margin-top: 40px;
-}
-
-button#btnSakujo{
-    background-color: red;
 }
 
 button#btnShousai{
@@ -74,6 +74,7 @@ a{
     font-weight: bold;
     padding: 15px;
     background-color: white;
+    cursor: pointer;
 }
 
 .drinkList td{
@@ -112,7 +113,7 @@ li:first-child, li:last-child{
     position: static;
 }
 
-label{
+label.product_name, .company_name, .price, .stock, .comment, .img_path{
     display: inline-block;
     width: 150px;
 }
@@ -136,6 +137,10 @@ label.product_name::after, .company_name::after, .price::after, .stock::after{
 
 input[type=text], input[type=file], textarea, select{
     width: 200px;
+}
+
+input[type=number]{
+    width: 70px;
 }
 
 img{

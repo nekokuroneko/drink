@@ -34,7 +34,7 @@ Route::get('/create', [App\Http\Controllers\ProductController::class, 'create'])
 Route::post('/create', [App\Http\Controllers\ProductController::class, 'store'])->name('drink.store');
 
 //商品情報削除
-Route::delete('/index/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('drink.destroy');
+Route::post('/destroy/{id}', [App\Http\Controllers\ProductController::class, 'destroy']);
 
 //商品情報詳細画面表示
 Route::get('/show/{id}', [App\Http\Controllers\ProductController::class, 'show'])->name('drink.show');

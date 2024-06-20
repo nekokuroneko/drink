@@ -20,9 +20,10 @@ class Sale extends Model
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    public function getIndex() {
-        //salesテーブルからデータを取得
-        $sales = Sale::all();
-        return $sales;
+    public function purchaseDrink($data) {
+        
+        DB::table('sales')->insert([
+            'product_id' => $data
+        ]);
     }
 }

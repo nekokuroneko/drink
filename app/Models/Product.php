@@ -40,7 +40,7 @@ class Product extends Model
     //登録処理
     public function registDrink($data, $img_path) {
 
-        DB::table('products')->insert([
+        Product::create([
             'product_name' => $data->product_name,
             'company_id' => $data->company_name,
             'price' => $data->price,
@@ -54,7 +54,7 @@ class Product extends Model
     //更新処理
     public function editDrink($data, $img_path) {
         
-        DB::table('products')->where('id', $data->id)->update([
+        Product::where('id', $data->id)->update([
             'product_name' => $data->product_name,
             'company_id' => $data->company_name,
             'price' => $data->price,

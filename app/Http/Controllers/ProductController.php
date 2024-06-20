@@ -17,29 +17,49 @@ class ProductController extends Controller
         $model = new Product();
         $products = $model->getIndex();
         $companies = Company::all();
-
+        
         $keyword = $request->input('keyword');
         $manufacturer = $request->input('manufacturer');
+        $kakakuKagen = $request->input('kakakuKagen');
+        $kakakuJougen = $request->input('kakakuJougen');
+        $zaikoKagen = $request->input('zaikoKagen');
+        $zaikoJougen = $request->input('zaikoJougen');
 
         $query = Product::query();
         
         if(!empty($keyword)) {
-            $query->where('product_name', 'like', '%' . $keyword . '%');
+            $query->where('product_name', 'like', '%' . $keyword . '%')->get();
         }
 
         if(!empty($manufacturer)) {
             $query->where('company_id', 'like', $manufacturer)->get();
         }
+
+        if(!empty($kakakuKagen)) {
+            $query->where('price', '>=', $kakakuKagen)->get();
+        }
+
+        if(!empty($kakakuJougen)) {
+            $query->where('price', '<=', $kakakuJougen)->get();
+        }
+
+        if(!empty($zaikoKagen)) {
+            $query->where('stock', '>=', $zaikoKagen)->get();
+        }
+
+        if(!empty($zaikoJougen)) {
+            $query->where('stock', '<=', $zaikoJougen)->get();
+        }
+
         $products = $query->paginate(8);
         
-        return view('index', ['products' => $products, 'companies' => $companies, 'keyword' => $keyword, 'manufacturer' => $manufacturer]);
+        return view('index',compact('products', 'companies', 'keyword', 'manufacturer', 'kakakuKagen', 'kakakuJougen', 'zaikoKagen', 'zaikoJougen'));
     }
 
     //削除処理
-    public function destroy($id) {
-        $products = Product::find($id);
+    public function destroy(Request $request, Product $products) {
+        $products = Product::findOrFail($request->id);
         $products->delete();
-        return redirect()->route('drink.index');
     }
 
     //新規登録画面表示
