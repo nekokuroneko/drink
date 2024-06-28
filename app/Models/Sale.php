@@ -20,10 +20,11 @@ class Sale extends Model
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
+    //購入処理
     public function purchaseDrink($data) {
         
-        DB::table('sales')->insert([
-            'product_id' => $data
+        Sale::create([
+            'product_id' => $data,
         ]);
     }
 }
